@@ -1,0 +1,5 @@
+-- 코드를 입력하세요
+# 동물의 이름은 몇 개인지 조회 ? 
+SELECT COUNT(DISTINCT(NAME))
+FROM ANIMAL_INS
+WHERE NAME IS NOT NULL
