@@ -1,0 +1,29 @@
+# PATIENT (환자 정보)
+# DOCTOR (의사 정보)
+# APPOINTMENT (진료 예약목록)
+
+# 22년 4월 13일 취소되지 않은 흉부외과 (CS) 진료 예약 내역 조회 
+# 
+# APNT_YMD
+SELECT APNT_NO,	PT_NAME, PT_NO, MCDP_CD, DR_NAME, APNT_YMD
+FROM 
+(SELECT 
+    APNT_YMD, 
+    APNT_NO,
+    PT_NO,
+    A.MCDP_CD MCDP_CD,
+    D.DR_NAME DR_NAME,
+    APNT_CNCL_YN,
+    APNT_CNCL_YMD
+FROM 
+    APPOINTMENT A LEFT JOIN DOCTOR D ON A.MDDR_ID = D.DR_ID) SUB1 
+    LEFT JOIN PATIENT USING (PT_NO)
+WHERE 
+    DATE_FORMAT(APNT_YMD, '%Y-%m-%d') ='2022-04-13'AND
+    APNT_CNCL_YN = 'N' AND
+    MCDP_CD = 'CS'
+ORDER BY APNT_YMD
+    
+
+
+    
